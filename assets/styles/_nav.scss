@@ -1,0 +1,240 @@
+@import "mixins";
+
+$pink: #EE0979;
+
+/* Nav */
+nav {
+    border-bottom: 1px solid #D6D6D6;
+    display: flex;    
+    height: 40px;
+    overflow: hidden;
+    padding: 0 15px;
+
+    @include mq(md){
+        height: 70px;
+    }
+
+    button {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        font-family: 'Effra-Bold';
+        font-size: 20px;
+        line-height: 1;
+        outline: none;
+        padding: 0;
+    }
+}
+
+// Logo 
+.logo {
+    display: flex;
+
+    &--large {
+        display: none;
+        @include mq(md){
+            display: block;
+        }
+    }
+
+    &--small {
+        @include mq(md){
+            display: none;
+        }
+    }
+}
+
+// Buttons 
+.buttons {
+    display: flex;
+    margin-left: auto;
+    width: 80%;
+
+    @include mq(md){
+        justify-content: flex-end
+    }
+
+    button {
+        color: #000;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        transition: color .2s ease-in;
+        width: 25%;
+
+        &:hover, &:active {
+            color: $pink;
+        }
+
+        svg path {
+            fill: currentColor;
+        }
+
+        @include mq(md){
+            margin-left: 45px;
+            width: auto;
+        }
+    }
+
+    span {
+        display: none;
+        margin-left: 10px;
+        
+        @include mq(lg){
+            display: inline-block;
+        }
+    }
+}
+
+// Search bar
+.search-bar {
+    display: none;
+}
+
+// Main menu 
+.main-menu {
+    background-color: #FFF;
+    font-family: 'Effra-Bold';
+    font-size: 20px;
+    height: 100%;
+    max-width: 350px;
+    opacity: 0;
+    overflow-y: auto;
+    padding-top: 30px;
+    position: fixed;
+    right: 0;
+    transform: translate3d(100%, 0, 0);
+    transition: opacity .4s ease-in-out, transform .4s ease-in-out;
+    width: calc(100% - 30px);
+    will-change: opacity, transform;
+
+    @include mq(lg){
+        max-width: 420px;
+    }
+
+    &--show {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 20px;
+    }
+
+    // User & Logut
+    .user-logout {
+        border-bottom: 2px solid #9a9a9a;
+        padding: 0 20px 20px;
+    }
+
+    // Links
+    li {
+        border-bottom: 1px solid #D6D6D6;
+
+        &.main-menu__heading, a {
+            padding: 15px 40px 15px 20px;
+        }
+
+        // Headings
+        &.main-menu__heading {
+            border-color: #9A9A9A;
+        }
+
+        // Dropdowns links
+        &.main-menu__dropdown-link {  
+            display: flex;
+            align-items: center;
+    
+            > a:after {
+                display: inline-block;
+                content: '';
+                background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20' height='20' viewBox='0 0 20 20'> <defs> <path id='a' d='M11 9.088L19.301.793a1 1 0 1 1 1.414 1.414l-9.008 9.002a1 1 0 0 1-1.414 0L1.286 2.207A1 1 0 1 1 2.699.793L11 9.088z'/> </defs> <g fill='none' fill-rule='evenodd' transform='translate(-1 4)'> <mask id='b' fill='#fff'> <use xlink:href='#a'/> </mask> <use fill='#4E5C68' fill-rule='nonzero' xlink:href='#a'/> <g fill='#333' mask='url(#b)'> <path d='M1-4h20v20H1z'/> </g> </g> </svg>");
+                background-size: 16px;
+                height: 16px;
+                width: 16px;
+                margin-left: 10px;
+                transform: rotate(0);
+            }
+    
+            &--open {
+                a {
+                    color: $pink;
+                    &:after {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        a {
+            color: #000;
+            display: block;
+            text-decoration: none;
+            transition: color .2s ease-in;
+    
+            &:hover, &:active {
+                color: $pink;
+            }
+        }
+    }    
+
+    // Dropdown
+    &__dropdown {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .5s ease-in-out;
+
+        &--open {
+            max-height: 500px;
+        }
+        
+        li {
+            background-color: #EBEBEB;
+        }
+
+        a {
+            padding-left: 30px;
+        }
+    }    
+
+    // Close button
+    &__close-btn {
+        position: absolute; 
+        right: 15px;
+        top: 10px;
+
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    // Main menu backdrop
+    &__backdrop {
+        background-color: rgba(0,0,0,.7);
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        pointer-events: none;
+        position: fixed;
+        opacity: 0;
+        right: 0;
+        top: 0;
+        transition: opacity .2s ease-in;
+        width: 100%;
+        will-change: opacity;
+
+        &--show {
+            opacity: 1;
+        }
+    }
+}
